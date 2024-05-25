@@ -7,6 +7,7 @@ class ContactsController < ApplicationController
   end
 
   def new
+    @company = Company.find_by({"id" => params["id"]})
     # render contacts/new view with new Contact form
   end
 
@@ -21,7 +22,7 @@ class ContactsController < ApplicationController
     @contact["phone_number"] = params["phone_number"]
 
     # assign relationship between Contact and Company
-    @contact["company_id"] = params["company_id"]
+    @contact["company_id"] = @company["id"]
 
     # save Contact row
     @contact.save
